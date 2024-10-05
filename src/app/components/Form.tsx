@@ -8,6 +8,7 @@ export default function Form() {
   const locationRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const item = {
+    id: 0,
     name: "",
     price: 0,
     category: "",
