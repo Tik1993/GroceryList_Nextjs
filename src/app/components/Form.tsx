@@ -1,17 +1,24 @@
 "use client";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useEffect } from "react";
 import Item from "../types/Item";
 
 interface FormProps {
-  onAddItem: (item: Item) => void;
+  onSubmit: (item: Item) => void;
+  initialItem?: Item;
+  isEdit?: boolean;
 }
 
-export default function Form({ onAddItem }: FormProps) {
+export default function Form({
+  onSubmit,
+  initialItem,
+  isEdit = false,
+}: FormProps) {
   const itemNameRef = useRef<HTMLInputElement>(null);
   const itemPriceRef = useRef<HTMLInputElement>(null);
   const categoryRef = useRef<HTMLSelectElement>(null);
   const locationRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const dateRef = useRef<HTMLInputElement>(null);
   const item = {
     id: 0,
     name: "",
@@ -21,6 +28,19 @@ export default function Form({ onAddItem }: FormProps) {
     description: "",
     Date: new Date(),
   };
+
+  useEffect(() => {
+    if (initialItem) {
+      if (itemNameRef.current) itemNameRef.current.value = initialItem.name;
+      if (itemPriceRef.current)
+        itemPriceRef.current.value = initialItem.price.toString();
+      if (categoryRef.current) categoryRef.current.value = initialItem.category;
+      if (locationRef.current) locationRef.current.value = initialItem.location;
+      if (descriptionRef.current)
+        descriptionRef.current.value = initialItem.description;
+    }
+    if (dateRef.current) dateRef.current.value = item.Date.toISOString();
+  }, [initialItem]);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -48,7 +68,7 @@ export default function Form({ onAddItem }: FormProps) {
     if (descriptionRef.current !== null) {
       item.description = descriptionRef.current.value;
     }
-    onAddItem(item);
+    onSubmit(item);
   };
   return (
     <>

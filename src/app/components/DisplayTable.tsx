@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import Item from "../types/Item";
 
 interface DisplayTableProps {
@@ -21,6 +22,7 @@ export default function DisplayTable({ data }: DisplayTableProps) {
               <th>Location</th>
               <th>Description</th>
               <th>Date</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -36,6 +38,11 @@ export default function DisplayTable({ data }: DisplayTableProps) {
                   {item.Date instanceof Date
                     ? item.Date.toLocaleString()
                     : item.Date}
+                </td>
+                <td>
+                  <Link href={`/edit/${item.id}`} className="btn btn-primary">
+                    Edit
+                  </Link>
                 </td>
               </tr>
             ))}

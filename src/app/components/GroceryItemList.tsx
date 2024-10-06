@@ -16,7 +16,7 @@ export default function GroceryItemList() {
   return (
     <div className="m-3 flex flex-col gap-y-3">
       <h1>Grocery Itme Record list</h1>
-      <Form onAddItem={handleAddItem} />
+      <Form onSubmit={handleAddItem} />
       <DisplayTable data={data} />
     </div>
   );
