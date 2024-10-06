@@ -1,7 +1,12 @@
 "use client";
-
 import { FormEvent, useRef } from "react";
-export default function Form() {
+import Item from "../types/Item";
+
+interface FormProps {
+  onAddItem: (item: Item) => void;
+}
+
+export default function Form({ onAddItem }: FormProps) {
   const itemNameRef = useRef<HTMLInputElement>(null);
   const itemPriceRef = useRef<HTMLInputElement>(null);
   const categoryRef = useRef<HTMLSelectElement>(null);
@@ -43,7 +48,7 @@ export default function Form() {
     if (descriptionRef.current !== null) {
       item.description = descriptionRef.current.value;
     }
-    console.log(item);
+    onAddItem(item);
   };
   return (
     <>

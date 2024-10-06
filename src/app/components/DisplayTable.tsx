@@ -6,7 +6,6 @@ interface DisplayTableProps {
 }
 
 export default function DisplayTable({ data }: DisplayTableProps) {
-  console.log(data);
   return (
     <>
       <h1 className="text-3xl">Table</h1>
