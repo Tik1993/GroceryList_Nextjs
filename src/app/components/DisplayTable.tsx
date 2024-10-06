@@ -4,9 +4,10 @@ import Item from "../types/Item";
 
 interface DisplayTableProps {
   data: Item[];
+  onDelete: (id: number) => void;
 }
 
-export default function DisplayTable({ data }: DisplayTableProps) {
+export default function DisplayTable({ data, onDelete }: DisplayTableProps) {
   return (
     <>
       <h1 className="text-3xl">Table</h1>
@@ -22,6 +23,7 @@ export default function DisplayTable({ data }: DisplayTableProps) {
               <th>Location</th>
               <th>Description</th>
               <th>Date</th>
+              <th></th>
               <th></th>
             </tr>
           </thead>
@@ -43,6 +45,14 @@ export default function DisplayTable({ data }: DisplayTableProps) {
                   <Link href={`/edit/${item.id}`} className="btn btn-primary">
                     Edit
                   </Link>
+                </td>
+                <td>
+                  <button
+                    onClick={() => onDelete(item.id)}
+                    className="btn btn-secondary"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
